@@ -5,6 +5,7 @@ import com.cheng.unit.coreapi.CoreapiApplication;
 import com.cheng.unit.coreapi.EncrpytServer;
 import com.cheng.unit.coreapi.dao.UserMapper;
 import com.cheng.unit.coreapi.entity.User;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -39,7 +40,8 @@ import static org.mockito.Mockito.*;
  * 当需要mock私有方法的时候, 只是需要加注解@PrepareForTest，注解里写的类是私有方法所在的类
  */
 @PrepareForTest(value = { UserServiceImpl.class , EncrpytServer.class})
-public class UserServiceImplTest {
+@Slf4j
+public class PowerMockitoDemo {
 
     private UserServiceImpl userService;
 
@@ -54,25 +56,6 @@ public class UserServiceImplTest {
         userService = new UserServiceImpl();
         userMapper = Mockito.mock(UserMapper.class);
         userService.setUserMapper(userMapper);
-    }
-
-
-    /**
-     * 普通方法mock
-     */
-    @Test
-    public void testNormal() {
-        User xiaoHua = User.builder().username("XiaoHua").password("111111").build();
-        User xiaoMing = User.builder().username("XiaoMing").password("111111").build();
-        BDDMockito.given(userMapper.selectById(eq(1))).willReturn(xiaoHua);
-        BDDMockito.given(userMapper.selectById(eq(2))).willReturn(xiaoMing);
-        User resultOne = userService.findById(1);
-        User resultTwo = userService.findById(2);
-
-        Assertions.assertEquals(xiaoHua.getUsername(), resultOne.getUsername());
-        Assertions.assertEquals(xiaoMing.getUsername(), resultTwo.getUsername());
-        Mockito.verify(userMapper, times(2)).selectById(any());
-
     }
 
     /**
@@ -90,6 +73,8 @@ public class UserServiceImplTest {
 
         Assertions.assertEquals(password, "111111");
         PowerMockito.verifyPrivate(spy, times(1)).invoke("encrypt", xiaoHua);
+        //打印测试方法,测试case,简要描述等信息
+        log.info("function name={}, case={}, description={}", "testNormal", "case", "description");
     }
 
     /**
@@ -109,6 +94,9 @@ public class UserServiceImplTest {
 
         Assertions.assertEquals(password, "111111");
         PowerMockito.verifyPrivate(mock, times(1)).invoke("encrypt", xiaoHua);
+
+        //打印测试方法,测试case,简要描述等信息
+        log.info("function name={}, case={}, description={}", "testNormal", "case", "description");
     }
 
     /**
@@ -121,6 +109,9 @@ public class UserServiceImplTest {
 
         String userAttr = userService.getUserAttr();
         Assertions.assertEquals(userAttr, "YY");
+
+        //打印测试方法,测试case,简要描述等信息
+        log.info("function name={}, case={}, description={}", "testNormal", "case", "description");
     }
 
     /**
@@ -139,6 +130,8 @@ public class UserServiceImplTest {
         Mockito.verify(encrpytServer, times(1)).isNormal(user);
         Assertions.assertEquals(linkServer, false);
 
+        //打印测试方法,测试case,简要描述等信息
+        log.info("function name={}, case={}, description={}", "testNormal", "case", "description");
     }
 
 }
