@@ -1,7 +1,6 @@
 package com.cheng.unit.coreapi.service.impl;
 
 
-import com.cheng.unit.coreapi.CoreapiApplication;
 import com.cheng.unit.coreapi.EncrpytServer;
 import com.cheng.unit.coreapi.dao.UserMapper;
 import com.cheng.unit.coreapi.entity.User;
@@ -10,15 +9,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.powermock.modules.junit4.PowerMockRunnerDelegate;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.mockito.Mockito.*;
 
@@ -26,9 +21,7 @@ import static org.mockito.Mockito.*;
  * powermock 结合mockito使用方案
  */
 //使用PowerMock的启动器
-@SpringBootTest(classes = CoreapiApplication.class)
 @RunWith(PowerMockRunner.class)
-@PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
 @PowerMockIgnore(value = { "javax.management.*", "javax.net.ssl.*", "javax.net.SocketFactory" })
 
 /**
@@ -78,7 +71,7 @@ public class PowerMockitoDemo {
     }
 
     /**
-     * 使用mock的方式模拟私有方法:@spy使用的真实的对象实例，调用的都是真实的方法
+     * 使用mock的方式模拟私有方法: 需要使用thenCallRealMethod调用真实方法
      * @throws Exception
      */
     @Test
@@ -109,6 +102,8 @@ public class PowerMockitoDemo {
 
         String userAttr = userService.getUserAttr();
         Assertions.assertEquals(userAttr, "YY");
+        PowerMockito.verifyStatic(UserServiceImpl.class, times(1));
+        UserServiceImpl.getUserSign();
 
         //打印测试方法,测试case,简要描述等信息
         log.info("function name={}, case={}, description={}", "testNormal", "case", "description");
