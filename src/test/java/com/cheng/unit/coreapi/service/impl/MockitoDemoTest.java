@@ -3,11 +3,11 @@ package com.cheng.unit.coreapi.service.impl;
 import com.cheng.unit.coreapi.CoreapiApplicationTests;
 import com.cheng.unit.coreapi.dao.UserMapper;
 import com.cheng.unit.coreapi.entity.User;
+import io.qameta.allure.junit4.DisplayName;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 
@@ -30,7 +30,7 @@ public class MockitoDemoTest extends CoreapiApplicationTests {
     /**
      * 使用mockito 模拟依赖 set到被测试类中, 所以需要使用set注入的方式
      */
-    @BeforeEach
+    @Before
     public void setUp() {
         userService = new UserServiceImpl();
         userMapper = Mockito.mock(UserMapper.class);
