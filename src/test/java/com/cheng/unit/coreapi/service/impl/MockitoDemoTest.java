@@ -20,7 +20,7 @@ import static org.mockito.Mockito.times;
  * @date 2021/3/18 7:35 下午
  **/
 @Slf4j
-public class MockitoDemo extends CoreapiApplicationTests {
+public class MockitoDemoTest extends CoreapiApplicationTests {
 
     private UserServiceImpl userService;
 

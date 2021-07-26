@@ -34,7 +34,7 @@ import static org.mockito.Mockito.*;
  */
 @PrepareForTest(value = { UserServiceImpl.class , EncrpytServer.class})
 @Slf4j
-public class PowerMockitoDemo {
+public class PowerMockitoDemoTest {
 
     private UserServiceImpl userService;
 
