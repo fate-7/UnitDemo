@@ -3,6 +3,7 @@ package com.cheng.unit.coreapi.service.impl;
 import com.cheng.unit.coreapi.CoreapiApplicationTests;
 import com.cheng.unit.coreapi.dao.UserMapper;
 import com.cheng.unit.coreapi.entity.User;
+import io.qameta.allure.junit4.DisplayName;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,6 +42,7 @@ public class MockitoDemoTest extends CoreapiApplicationTests {
      * 普通方法mock
      */
     @Test
+    @DisplayName("test normal function")
     public void testNormal() {
         User xiaoHua = User.builder().username("XiaoHua").password("111111").build();
         User xiaoMing = User.builder().username("XiaoMing").password("111111").build();
@@ -51,7 +53,7 @@ public class MockitoDemoTest extends CoreapiApplicationTests {
 
         Assertions.assertEquals(xiaoHua.getUsername(), resultOne.getUsername());
         Assertions.assertEquals(xiaoMing.getUsername(), resultTwo.getUsername());
-        Mockito.verify(userMapper, times(2)).selectById(any());
+        Mockito.verify(userMapper, times(3)).selectById(any());
 
         //打印测试方法,测试case,简要描述等信息
         log.info("function name={}, case={}, description={}", "testNormal", "case", "description");
