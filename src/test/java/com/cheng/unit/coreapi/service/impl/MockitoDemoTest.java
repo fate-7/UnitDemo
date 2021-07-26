@@ -53,7 +53,7 @@ public class MockitoDemoTest extends CoreapiApplicationTests {
 
         Assertions.assertEquals(xiaoHua.getUsername(), resultOne.getUsername());
         Assertions.assertEquals(xiaoMing.getUsername(), resultTwo.getUsername());
-        Mockito.verify(userMapper, times(2)).selectById(any());
+        Mockito.verify(userMapper, times(3)).selectById(any());
 
     }
 
