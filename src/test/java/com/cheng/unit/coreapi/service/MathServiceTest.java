@@ -4,9 +4,10 @@ import com.cheng.unit.coreapi.CoreapiApplicationTests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
-
-public class MathServiceTest extends CoreapiApplicationTests {
+@SpringBootTest
+public class MathServiceTest {
 
 
     @Test
